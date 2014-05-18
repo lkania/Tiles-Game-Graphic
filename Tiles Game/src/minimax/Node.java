@@ -18,8 +18,8 @@ public abstract class Node {
 	protected Point bestPlay;
 	protected boolean process=false;
 	protected int value;
-	protected boolean allChildsTerminal=true;
-
+	protected boolean isTerminal = false;
+	
 
 	public Node(Board board,int min_points,int max_points,Point position, int value)
 	{
@@ -53,8 +53,18 @@ public abstract class Node {
 
 
 	public int heuristicValue() {
+		if(isTerminal)
+			return terminalValue();
+		
 		return max_points-min_points;
 	}
+
+	protected int terminalValue() {
+		return (max_points>min_points) ? Integer.MAX_VALUE:Integer.MIN_VALUE;
+	}
+	
+	
+	
 
 	public boolean isTerminal() {
 		return this.board.endGame();
@@ -68,7 +78,7 @@ public abstract class Node {
 
 
 	public String format() {
-		return hashCode() + "[label=\"ALL: "+allChildsTerminal+ ((position!=null) ? "("+position.x+","+position.y+")":"START ") +((!process) ? "\" style=filled color=grey ":" "+nicePrint(value)+"\"")+"]" +";";
+		return hashCode() + "[label=\""+ ((position!=null) ? "("+position.x+","+position.y+")":"START ") +((!process) ? "\" style=filled color=grey ":" "+nicePrint(value)+"\"")+"]" +";";
 	}
 
 	@Override

@@ -17,8 +17,6 @@ public class MaxNode extends Node {
 	@Override
 	public List<Node> giveChilds() {
 		
-		this.allChildsTerminal=true;
-		
 		if(this.getChilds()!=null)
 			return this.getChilds();
 		
@@ -63,28 +61,22 @@ public class MaxNode extends Node {
 	public boolean isTerminal()
 	{
 		boolean ans = super.isTerminal();
-		max_points+= (ans) ? 0.3*max_points:0;
+		if(ans)
+		{
+			max_points*=1.3;
+			isTerminal = true;
+		}
 		return ans;
 		
 	}
 
+		
 
 	@Override
 	public String format() {
 		
 		return super.format()+this.toString()+" [shape=box];" ;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+		
 }

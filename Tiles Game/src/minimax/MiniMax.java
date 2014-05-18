@@ -38,7 +38,6 @@ public class MiniMax {
 		{	
 			if(timeLimit && time<0)
 				endByTime=true;
-			node.allChildsTerminal=terminal;  /*Necesario para solution con TimeLimit*/
 			int heuristicValue = node.heuristicValue();
 			node.update(heuristicValue, null);
 			return heuristicValue;
@@ -60,13 +59,9 @@ public class MiniMax {
 			
 			node.update(solution(child,level-1,node.alpha,node.beta,time),child.position);
 			
-			node.allChildsTerminal = node.allChildsTerminal && child.allChildsTerminal; /*Necesario para solution con TimeLimit*/
-						
+		
 			if(!pruneAlphaBeta || node.alphaBetaPrune())
-			{
-				
 				return node.returnValue();
-			}
 			
 			long endCycle = System.currentTimeMillis();
 			
@@ -80,17 +75,17 @@ public class MiniMax {
 	}
 	
 	
-	private void solution()
+	private void solutionByTime(Board board,int max_points,int min_points)
 	{
 		int level=0; double time = timeMax; MaxNode backupNode = null;
 		
-		while(!endByTime)
+		while(!endByTime && initial_node.value!=Integer.MAX_VALUE) 
 		{
 			//	Luego de cada pasada de solution recursivo, si no se habia llegado a nodos terminales deja el initial_node.allChildsTErminal en false, por lo cual debemos resetearlo. 
 			
 			backupNode = initial_node; 
 			
-			initial_node.allChildsTerminal=true; 
+			initial_node = new MaxNode(board,min_points,max_points,null);
 			
 			long start = System.currentTimeMillis();
 			
@@ -99,10 +94,6 @@ public class MiniMax {
 			long end = System.currentTimeMillis();
 			
 			time-=(end-start);
-		
-			if(initial_node.allChildsTerminal)
-				break;
-
 					
 		}
 		
@@ -115,7 +106,7 @@ public class MiniMax {
 	public long testPrune(Board board)
 	{
 		long startTime = System.currentTimeMillis();
-		solution(board);	
+		solution(board,0,0);	
 		long endTime = System.currentTimeMillis();;
 		long duration = endTime - startTime;
 		return duration;
@@ -124,14 +115,14 @@ public class MiniMax {
 	
 	
 
-	public Point solution(Board board)
+	public Point solution(Board board,int max_points,int min_points)
 	{
-		this.initial_node = new MaxNode(board,0,0,null);
+		this.initial_node = new MaxNode(board,min_points,max_points,null);
 
 		if(!timeLimit)
 			solution(initial_node,maxLevel,initial_node.alpha,initial_node.beta,0);
 		else
-			solution();
+			solutionByTime(board,max_points,min_points);
 		
 		if(makeTree)
 			createTree();		
@@ -147,6 +138,9 @@ public class MiniMax {
 			File logFile = new File("Tree.txt");
 
 			writer = new BufferedWriter(new FileWriter(logFile));
+			
+			System.out.println(logFile.getAbsolutePath());
+			
 			writer.write("graph tree {");
 			writer.newLine();
 
@@ -159,6 +153,7 @@ public class MiniMax {
 
 				Node aux = queue.poll();
 				writer.write(aux.format());
+				writer.newLine();
 
 				if(aux.getChilds()!=null)
 				{
@@ -169,7 +164,6 @@ public class MiniMax {
 						sb.append(" -- ");
 						sb.append(child.toString());
 						sb.append(";");
-						writer.newLine();
 						writer.write(sb.toString());
 						writer.newLine();
 						queue.add(child);

@@ -1,8 +1,0 @@
-graph tree {
-15041882[label="ALL: trueSTART  50"];15041882 [shape=box];
-15041882 -- 9829657;
-9829657 [ color=red];
-
-15041882 -- 18587569;
-9829657[label="ALL: true(3,0) 50"];18587569[label="ALL: true(4,0) 14"];
-}

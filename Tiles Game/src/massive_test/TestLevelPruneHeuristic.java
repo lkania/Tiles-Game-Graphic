@@ -36,9 +36,9 @@ public class TestLevelPruneHeuristic {
 			writer.newLine();
 			for(int level=1;level<=levelMax;level++)
 			{
-				for(int row=9;row<=size;row++)
+				for(int row=2;row<=size;row++)
 				{
-					for(int column=9;column<=size;column++)
+					for(int column=2;column<=size;column++)
 					{
 						for(int colors=2;colors<=max_colors;colors++)
 						{

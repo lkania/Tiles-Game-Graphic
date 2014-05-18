@@ -21,7 +21,7 @@ public class State {
 	}
 
 	public void chooseComputerMove() {
-		Point move = minimax.solution(board);
+		Point move = minimax.solution(board,ai_points,human_points);
 		
 		if(move==null)
 			return;

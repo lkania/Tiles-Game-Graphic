@@ -16,7 +16,6 @@ public class MinNode extends Node {
 	@Override
 	public List<Node> giveChilds() {
 
-		this.allChildsTerminal=true;
 		
 		if(this.getChilds()!=null)
 			return this.getChilds();
@@ -58,13 +57,14 @@ public class MinNode extends Node {
 	public boolean isTerminal()
 	{
 		boolean ans = super.isTerminal();
-		min_points+= (ans) ? 0.3*min_points:0;
+		if(ans)
+		{
+			min_points*=1.3;
+			isTerminal = true;
+		}
 		return ans;
 		
 	}
-
 	
-		
 	
-
 }
