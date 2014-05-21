@@ -100,7 +100,7 @@ public class Board implements Cloneable{
 		return true;
 	}
 
-	private void gravity()
+	public void gravity()
 	{
 		for(int column=0;column<board.length;column++)
 			gravityColumn(column);
@@ -200,6 +200,8 @@ public class Board implements Cloneable{
 		List<Point> regions = new ArrayList<Point>();
 
 		Board newBoard = clone();
+		
+		
 
 		for(int column=0;column<newBoard.board.length; column++) {
 			for(int row=0; row< newBoard.board[0].length; row++) {
@@ -208,17 +210,21 @@ public class Board implements Cloneable{
 				}
 			}
 		}
-
+		
 		return regions;
 	}
-
+ 
 	public boolean endGame()
 	{
-		return regions().size()==0;
+		return regions().isEmpty();
 	}
 
 	public char[][] getMatrix() {
 		return board;
+	}
+
+	public boolean isEmpty() {
+		return board[0][board[0].length-1]==' ';
 	}
 
 

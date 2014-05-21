@@ -6,7 +6,6 @@ import core.Game;
 import core.State;
 import displays.DisplayConsole;
 import displays.Displayable;
-import displays.GraphicDisplay;
 
 
 public class Main {
@@ -14,7 +13,7 @@ public class Main {
 	public static void main(String[] args) {
 		
 		int human_points,computer_points;
-		Integer timeOrDepth;
+		Double timeOrDepth;
 		boolean time=false,prune=false,tree=false;
 		char[][] matrix;
 		
@@ -35,16 +34,20 @@ public class Main {
 			}
 		}
 		else
+		{
+			System.err.println("args: -file not found");
 			return;
+		}
 				
 		Board board = new Board(matrix);
+		board.gravity();
 		
 		if("-maxtime".equals(args[2]) || "-depth".equals(args[2]))
 		{
-			timeOrDepth = Integer.parseInt(args[3]);
+			timeOrDepth = Double.parseDouble(args[3]);
 			if(timeOrDepth==null)
 			{
-				System.out.println("ERROR: wrong integer");
+				System.err.println("args: time/depth number not specified");
 				return;
 			}			
 			if("-maxtime".equals(args[2]))
@@ -54,7 +57,10 @@ public class Main {
 			}
 		}
 		else
+		{
+			System.err.println("args: maxtime/depth not specified");
 			return;
+		}
 				
 		if(args.length > 5 && ("-prune".equals(args[5]) || "-tree".equals(args[5])))
 		{
@@ -64,15 +70,23 @@ public class Main {
 				tree=true;
 		}
 		else
+		{
+			System.err.println("args: prune/tree not specified");
 			return;
+		}
 		
 		if(args.length==7 && tree==false)
+		{
 			if( "-tree".equals(args[6]))
 				tree=true;
 			else
+			{
+				System.err.println("args: 7th argument not valid");
 				return;
+			}
+		}
 		
-		State state = new State(board,human_points,computer_points,prune,time,timeOrDepth,timeOrDepth,tree);
+		State state = new State(board,human_points,computer_points,prune,time,(int)timeOrDepth.doubleValue(),timeOrDepth,tree);
 		Displayable display;
 				
 		if("-console".equals(args[4]))
@@ -84,14 +98,15 @@ public class Main {
 			return;
 		}
 		else if("-visual".equals(args[4]))
-			display = new GraphicDisplay(state);
+		{
+			@SuppressWarnings("unused")
+			Game game = new Game(state);
+		}
 		else
 		{
 			System.out.println("ERROR: Display not especified");
 			return;
 		}
-		
-		Game.newGame(state,display);
 		
 		return;
 		

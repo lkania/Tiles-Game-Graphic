@@ -17,17 +17,14 @@ public class MaxNode extends Node {
 	@Override
 	public List<Node> giveChilds() {
 		
-		if(this.getChilds()!=null)
-			return this.getChilds();
-		
 		
 		List<Point> regions = board.regions();
 		
-		if(regions.size()==0)
+		if(regions.isEmpty())
 			return null;
 		
 		List<Node> childs = new LinkedList<Node>();
-		
+		bestPlay=regions.get(0);
 		for(Point p : regions)
 		{
 			
@@ -41,7 +38,11 @@ public class MaxNode extends Node {
 		return childs;
 	}
 	
-	
+	protected int terminalValue() {
+		if(board.isEmpty())
+			max_points*=1.3;
+		return super.terminalValue();
+	}
 
 
 	@Override

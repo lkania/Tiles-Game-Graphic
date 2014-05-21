@@ -33,8 +33,7 @@ public class MiniMax {
 		long start = System.currentTimeMillis();
 		
 		node.process=true;
-		boolean terminal=node.isTerminal();
-		if(level == 0 || terminal || (timeLimit && time<0))
+		if(level == 0 || node.isTerminal() || (timeLimit && time<0))
 		{	
 			if(timeLimit && time<0)
 				endByTime=true;
@@ -81,7 +80,6 @@ public class MiniMax {
 		
 		while(!endByTime && initial_node.value!=Integer.MAX_VALUE) 
 		{
-			//	Luego de cada pasada de solution recursivo, si no se habia llegado a nodos terminales deja el initial_node.allChildsTErminal en false, por lo cual debemos resetearlo. 
 			
 			backupNode = initial_node; 
 			
@@ -139,7 +137,7 @@ public class MiniMax {
 
 			writer = new BufferedWriter(new FileWriter(logFile));
 			
-			System.out.println(logFile.getAbsolutePath());
+			System.out.println("El archivo se creo en: "+logFile.getAbsolutePath());
 			
 			writer.write("graph tree {");
 			writer.newLine();

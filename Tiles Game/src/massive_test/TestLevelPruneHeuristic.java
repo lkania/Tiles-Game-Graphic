@@ -3,8 +3,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.LinkedList;
-import java.util.Queue;
 
 import core.Board;
 import minimax.MiniMax;
@@ -19,7 +17,7 @@ public class TestLevelPruneHeuristic {
 
 	public static void csvFormat()
 	{
-		System.out.println("Comienza la creación del Archivo");
+		System.out.println("Comienza la creaciï¿½n del Archivo");
 		BufferedWriter writer = null;
 		int size = 14;
 		int max_colors = 5;
@@ -71,7 +69,7 @@ public class TestLevelPruneHeuristic {
 			
 			writer.close();
 			
-			System.out.println("Finalizó la creación del Archivo");
+			System.out.println("Finalizï¿½ la creaciï¿½n del Archivo");
 
 		} catch (Exception e) {
 			e.printStackTrace();

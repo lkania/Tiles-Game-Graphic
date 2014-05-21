@@ -30,12 +30,6 @@ public abstract class Node {
 		this.value=value;
 	}
 
-
-
-	public List<Node> getChilds() {
-		return childs;
-	}
-
 	public void setChilds(List<Node> childs) {
 		this.childs = childs;
 	}
@@ -99,6 +93,10 @@ public abstract class Node {
 
 
 	
+	}
+
+	public List<Node> getChilds() {
+		return childs;
 	}
 
 }

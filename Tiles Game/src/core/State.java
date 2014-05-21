@@ -10,7 +10,7 @@ public class State {
 	private int human_points;
 	private int ai_points;
 	private MiniMax minimax;
-	private boolean humanTurn;
+	private volatile boolean humanTurn;
 	
 	public State(Board board, int human_points, int ai_points,boolean pruneAlphaBeta,boolean timeLimit, int maxLevel, double timeMax, boolean makeTree) {
 		super();
@@ -18,6 +18,7 @@ public class State {
 		this.human_points = human_points;
 		this.ai_points = ai_points;
 		this.minimax = new MiniMax(pruneAlphaBeta,timeLimit,maxLevel,timeMax,makeTree);
+		this.humanTurn = true;
 	}
 
 	public void chooseComputerMove() {
@@ -27,7 +28,6 @@ public class State {
 			return;
 		
 		ai_points+=board.delete(move.x,move.y);
-		
 
 	}
 	
@@ -54,13 +54,16 @@ public class State {
 	}
 
 	public boolean isOver()
-	{
+	{	
 		if(board.endGame())
 		{
+			if(!board.isEmpty())
+				return true;
+			
 			if(humanTurn)
-				human_points+=0.3*human_points;
+				human_points*=1.3;
 			else
-				ai_points+=0.3*ai_points;
+				ai_points*=1.3;
 			return true;
 		}
 		

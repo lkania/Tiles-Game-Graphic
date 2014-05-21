@@ -1,32 +1,36 @@
 package core;
 import java.awt.Point;
 
-import displays.Displayable;
+import view.GDisplay;
 
 public class Game {
 
-	public static void newGame(State state,Displayable displayable) {
-
-		Point move = null;
-
-		while(!state.isOver()) {
-
-			displayable.display();
-
-			if(state.isHumanTurn()) {
-
-				while(!state.humanMove(move))
-					move = displayable.getHumanMove();
-			} else {
-
-				state.chooseComputerMove();
-			}
-
-			state.toggleTurn();
-		}
-
-		displayable.display();
-		
-
+	private State state;
+	private GDisplay display;
+	private MinimaxRunner minimaxRunner;
+	
+	public Game(State state) {
+		this.state = state;
+		this.display = new GDisplay(state, this);
+		this.minimaxRunner = new MinimaxRunner(state, display);
 	}
+	
+	public synchronized void computerMove() {
+		minimaxRunner.start();
+	}
+	
+	public synchronized void humanMove(Point move) {
+		if (state.isHumanTurn() && state.humanMove(move)) {
+			display.display();
+			
+			if(state.isOver()) {
+				
+			} else {
+				computerMove();
+				state.toggleTurn();
+			}
+		}
+	}
+	
+	
 }

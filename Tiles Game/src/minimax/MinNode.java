@@ -16,17 +16,14 @@ public class MinNode extends Node {
 	@Override
 	public List<Node> giveChilds() {
 
-		
-		if(this.getChilds()!=null)
-			return this.getChilds();
-		
+	
 		List<Point> regions = board.regions();
 		
-		if(regions.size()==0)
+		if(regions.isEmpty())
 			return null;
 		
 		List<Node> childs = new LinkedList<Node>();
-		
+		bestPlay=regions.get(0);
 		for(Point p : regions)
 		{
 			Board newBoard = board.clone();
@@ -39,7 +36,12 @@ public class MinNode extends Node {
 		return childs;
 	}
 
-	
+	protected int terminalValue() {
+		if(board.isEmpty())
+			min_points*=1.3;
+		return super.terminalValue();
+	}
+
 
 	@Override
 	public void update(int value,Point bestPlay) {
