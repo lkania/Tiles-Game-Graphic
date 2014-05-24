@@ -23,7 +23,7 @@ public class MaxNode extends Node {
 		if(regions.isEmpty())
 			return null;
 		
-		List<Node> childs = new LinkedList<Node>();
+		childs = new LinkedList<Node>();
 		bestPlay=regions.get(0);
 		for(Point p : regions)
 		{
@@ -34,7 +34,6 @@ public class MaxNode extends Node {
 			childs.add(new MinNode(newBoard,min_points,max_points+points,p));
 		}
 		
-		super.childs = childs;
 		return childs;
 	}
 	

@@ -35,6 +35,7 @@ public class MiniMax {
 		node.process=true;
 		if(level == 0 || node.isTerminal() || (timeLimit && time<0))
 		{	
+			
 			if(timeLimit && time<0)
 				endByTime=true;
 			int heuristicValue = node.heuristicValue();
@@ -78,9 +79,10 @@ public class MiniMax {
 	{
 		int level=0; double time = timeMax; MaxNode backupNode = null;
 		
+		initial_node = new MaxNode(board,min_points,max_points,null);
+		
 		while(!endByTime && initial_node.value!=Integer.MAX_VALUE) 
 		{
-			
 			backupNode = initial_node; 
 			
 			initial_node = new MaxNode(board,min_points,max_points,null);

@@ -16,13 +16,12 @@ public class MinNode extends Node {
 	@Override
 	public List<Node> giveChilds() {
 
-	
 		List<Point> regions = board.regions();
 		
 		if(regions.isEmpty())
 			return null;
 		
-		List<Node> childs = new LinkedList<Node>();
+		childs = new LinkedList<Node>();
 		bestPlay=regions.get(0);
 		for(Point p : regions)
 		{
@@ -32,7 +31,6 @@ public class MinNode extends Node {
 			childs.add(new MaxNode(newBoard,min_points+points,max_points,p));
 		}
 		
-		super.childs = childs;
 		return childs;
 	}
 

@@ -30,12 +30,6 @@ public abstract class Node {
 		this.value=value;
 	}
 
-	public void setChilds(List<Node> childs) {
-		this.childs = childs;
-	}
-
-
-
 	public abstract List<Node> giveChilds();
 	
 	//	Retorna true si no es necesario seguir recorriendo los hijos
@@ -57,12 +51,9 @@ public abstract class Node {
 		return (max_points>min_points) ? Integer.MAX_VALUE:Integer.MIN_VALUE;
 	}
 	
-	
-	
 
 	public boolean isTerminal() {
 		return this.board.endGame();
-		
 	}
 
 	public int returnValue()
@@ -72,7 +63,7 @@ public abstract class Node {
 
 
 	public String format() {
-		return hashCode() + "[label=\""+ ((position!=null) ? "("+position.x+","+position.y+")":"START ") +((!process) ? "\" style=filled color=grey ":" "+nicePrint(value)+"\"")+"]" +";";
+		return hashCode() + "[label=\" terminal="+isTerminal+ ((position!=null) ? "("+position.x+","+position.y+")":"START ") +((!process) ? "\" style=filled color=grey ":" "+nicePrint(value)+"\"")+"]" +";";
 	}
 
 	@Override

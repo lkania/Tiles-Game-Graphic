@@ -6,7 +6,7 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import core.Board;
+
 import core.Game;
 import core.State;
 import displays.Displayable;
@@ -78,12 +78,6 @@ public class GDisplay extends JFrame implements Displayable {
 		//game.computerMove();
 	}
 	
-	public static void main(String[] args) {
-		State s = new State(new Board(10,15,4), 0, 0, true, false, 4, 200, false);
-		@SuppressWarnings("unused")
-		Game game = new Game(s);
-	}
-
 	@Override
 	public void display() {
 		repaint();

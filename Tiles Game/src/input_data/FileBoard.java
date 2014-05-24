@@ -1,4 +1,7 @@
 package input_data;
+
+
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -40,14 +43,20 @@ public class FileBoard {
 				throw new IOException();
 			}
 			char[] c=s.toCharArray();
-
-			for(int j=0;j<getColumn() ;j++){
-				board[j][i]=c[j];
-			}
-
-
+			
+			if(c.length!=getColumn())
+				throw new IOException();
+			
+				for(int j=0;j<getColumn() ;j++){
+					if((c[j]-'0')<0 || (c[j]-'0')>9 )
+						throw new IOException();
+					board[i][j]=c[j];
+				}
+			
+			
 		}
-
+		if(fBuffer.ready())
+			throw new IOException();
 	}
 	private void createBoard() {
 		board=new char[gamedata[0]][gamedata[1]];
@@ -55,8 +64,9 @@ public class FileBoard {
 	}
 
 	private void close() throws IOException{
-		f.close();
 		fBuffer.close();
+		f.close();
+		
 	}
 	private int readLineInetegr() throws IOException {
 

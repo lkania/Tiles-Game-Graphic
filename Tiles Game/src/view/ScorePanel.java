@@ -27,9 +27,9 @@ public class ScorePanel extends JPanel{
 		g.setColor(Color.black);
 		g.drawString("Minimax", 40, 15);
 		g.drawString("Human:", 0, 40);
-		g.drawString("-points: " + state.getHuman_points(), 15, 60);
+		g.drawString("-Points: " + state.getHuman_points(), 15, 60);
 		g.drawString("Computer:", 0, 85);
-		g.drawString("-points: " + state.getAi_points(), 15, 105);
+		g.drawString("-Points: " + state.getAi_points(), 15, 105);
 	}
 	
 }
