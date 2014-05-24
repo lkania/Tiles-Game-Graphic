@@ -64,7 +64,7 @@ public class Main {
 
 		if(args.length>5)
 		{
-			if("-prune".equals(args[5]) || ("-tree".equals(args[5]) && "-visual".equals(args[4])))
+			if("-prune".equals(args[5]) || ("-tree".equals(args[5]) && !"-visual".equals(args[4])))
 
 			{
 				if("-prune".equals(args[5]))
@@ -78,7 +78,7 @@ public class Main {
 				return;
 			}
 
-			if(args.length==7 && tree==false && "-visual".equals(args[4]))
+			if(args.length==7 && tree==false && !"-visual".equals(args[4]))
 			{
 				if( "-tree".equals(args[6]))
 					tree=true;
@@ -89,6 +89,7 @@ public class Main {
 				}
 			}
 		}
+		
 		State state = new State(board,human_points,computer_points,prune,time,(int)timeOrDepth.doubleValue(),timeOrDepth,tree);
 		Displayable display;
 

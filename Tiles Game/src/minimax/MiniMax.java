@@ -91,6 +91,9 @@ public class MiniMax {
 			
 			solution(initial_node,++level,initial_node.alpha,initial_node.beta,time);
 			
+			if(initial_node.value==Integer.MIN_VALUE)
+				break;
+			
 			long end = System.currentTimeMillis();
 			
 			time-=(end-start);

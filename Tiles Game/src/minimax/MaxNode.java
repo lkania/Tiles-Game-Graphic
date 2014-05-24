@@ -57,8 +57,11 @@ public class MaxNode extends Node {
 		if(ans && board.isEmpty())
 		{
 			max_points*=1.3;
-			isTerminal = true;
+			
+			
 		}
+		if(ans)
+			isTerminal = true;
 		return ans;
 		
 	}

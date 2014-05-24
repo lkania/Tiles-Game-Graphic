@@ -63,7 +63,7 @@ public abstract class Node {
 
 
 	public String format() {
-		return hashCode() + "[label=\" terminal="+isTerminal+ ((position!=null) ? "("+position.x+","+position.y+")":"START ") +((!process) ? "\" style=filled color=grey ":" "+nicePrint(value)+"\"")+"]" +";";
+		return hashCode() + "[label=\""+ ((position!=null) ? "("+position.x+","+position.y+")":"START ") +((!process) ? "\" style=filled color=grey ":" "+nicePrint(value)+"\"")+"]" +";";
 	}
 
 	@Override

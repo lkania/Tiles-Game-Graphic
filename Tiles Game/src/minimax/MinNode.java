@@ -53,8 +53,11 @@ public class MinNode extends Node {
 		if(ans && board.isEmpty())
 		{
 			min_points*=1.3;
-			isTerminal = true;
+			
 		}
+		if(ans)
+			isTerminal = true;
+		
 		return ans;
 		
 	}
