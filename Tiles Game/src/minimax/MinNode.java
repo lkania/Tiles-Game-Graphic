@@ -38,12 +38,15 @@ public class MinNode extends Node {
 	public void update(int value,Point bestPlay) {
 		
 		if(value<this.value)
+		{
 			this.value=value;
+			this.bestPlay=bestPlay;
+		}
 		
 		if(value<beta) 
 		{
 			beta=value;
-			this.bestPlay=bestPlay;
+		
 		}
 	}
 	

@@ -40,13 +40,15 @@ public class MaxNode extends Node {
 	@Override
 	public void update(int value,Point bestPlay) {
 		if(value>this.value)
+		{
 			this.value=value;
+			this.bestPlay=bestPlay;
+		}
 				
 		if(value>alpha) 
 		{	
-			
 			alpha=value;
-			this.bestPlay=bestPlay;
+			
 		}
 		
 	}

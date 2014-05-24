@@ -42,13 +42,13 @@ public abstract class Node {
 
 	public int heuristicValue() {
 		if(isTerminal)
-			return terminalValue();
+			return terminalValue(max_points-min_points);
 		
 		return max_points-min_points;
 	}
 
-	protected int terminalValue() {
-		return (max_points>min_points) ? Integer.MAX_VALUE:Integer.MIN_VALUE;
+	protected int terminalValue(int p) {
+		return (max_points>min_points) ? Integer.MAX_VALUE/2+p:Integer.MIN_VALUE/2+p;
 	}
 	
 
