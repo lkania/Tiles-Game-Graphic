@@ -38,13 +38,6 @@ public class MaxNode extends Node {
 		return childs;
 	}
 	
-	protected int terminalValue() {
-		if(board.isEmpty())
-			max_points*=1.3;
-		return super.terminalValue();
-	}
-
-
 	@Override
 	public void update(int value,Point bestPlay) {
 		if(value>this.value)
@@ -62,7 +55,7 @@ public class MaxNode extends Node {
 	public boolean isTerminal()
 	{
 		boolean ans = super.isTerminal();
-		if(ans)
+		if(ans && board.isEmpty())
 		{
 			max_points*=1.3;
 			isTerminal = true;

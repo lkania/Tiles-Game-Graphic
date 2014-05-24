@@ -59,7 +59,7 @@ public class MiniMax {
 			node.update(solution(child,level-1,node.alpha,node.beta,time),child.position);
 			
 		
-			if(!pruneAlphaBeta || node.alphaBetaPrune())
+			if(pruneAlphaBeta && node.alphaBetaPrune())
 				return node.returnValue();
 			
 			long endCycle = System.currentTimeMillis();
