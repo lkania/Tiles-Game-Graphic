@@ -33,7 +33,7 @@ public class MinimaxRunner implements Runnable{
 			display.display();
 			
 			if(state.isOver()) {
-				System.out.println("Gano ORS!");
+				display.showResults(state.winner());
 			} else {
 				state.toggleTurn();
 			}

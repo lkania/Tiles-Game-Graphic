@@ -27,18 +27,18 @@ public class MiniMax {
 	}
 
 
-	private int solution(Node node,int level,int alpha,int beta,double time)
+	private double solution(Node node,int level,double alpha,double beta,double time)
 	{
 
 		long start = System.currentTimeMillis();
 		
 		node.process=true;
-		if(level == 0 || node.isTerminal() || (timeLimit && time<0))
+		if(node.isTerminal() || level == 0 || (timeLimit && time<0))
 		{	
 			
 			if(timeLimit && time<0)
 				endByTime=true;
-			int heuristicValue = node.heuristicValue();
+			double heuristicValue = node.heuristicValue();
 			node.update(heuristicValue, null);
 			return heuristicValue;
 		}
@@ -53,7 +53,7 @@ public class MiniMax {
 		
 		time -= timeMain;
 		
-		for(Node child : node.giveChilds())
+		for(Node child : node.giveChildren())
 		{
 			long startCycle = System.currentTimeMillis();
 			
@@ -72,26 +72,25 @@ public class MiniMax {
 			
 		}
 		return node.returnValue();
-	}
+	}	
 	
-	
-	private void solutionByTime(Board board,int max_points,int min_points)
+	private void solutionByTime(Board board,double max_points,double min_points)
 	{
 		int level=0; double time = timeMax; MaxNode backupNode = null;
 		
 		initial_node = new MaxNode(board,min_points,max_points,null);
 		
-		while(!endByTime && initial_node.value!=Integer.MAX_VALUE) 
+		while(!endByTime) 
 		{
 			backupNode = initial_node; 
-			
+
 			initial_node = new MaxNode(board,min_points,max_points,null);
 			
 			long start = System.currentTimeMillis();
 			
 			solution(initial_node,++level,initial_node.alpha,initial_node.beta,time);
-			
-			if(initial_node.value==Integer.MIN_VALUE)
+						
+			if(initial_node.value<=Integer.MIN_VALUE/2 || initial_node.value>=Integer.MAX_VALUE/2)
 				break;
 			
 			long end = System.currentTimeMillis();
@@ -115,10 +114,8 @@ public class MiniMax {
 		return duration;
 		
 	}
-	
-	
 
-	public Point solution(Board board,int max_points,int min_points)
+	public Point solution(Board board,double max_points,double min_points)
 	{
 		this.initial_node = new MaxNode(board,min_points,max_points,null);
 
@@ -138,7 +135,7 @@ public class MiniMax {
 		BufferedWriter writer = null;
 
 		try {
-			File logFile = new File("Tree.txt");
+			File logFile = new File("Tree.dot");
 
 			writer = new BufferedWriter(new FileWriter(logFile));
 			

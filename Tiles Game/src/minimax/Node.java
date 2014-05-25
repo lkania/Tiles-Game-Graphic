@@ -9,19 +9,19 @@ public abstract class Node {
 
 	
 	protected Board board;
-	protected int alpha=Integer.MIN_VALUE;
-	protected int beta=Integer.MAX_VALUE;
-	protected int min_points;
-	protected int max_points;
+	protected double alpha=Integer.MIN_VALUE;
+	protected double beta=Integer.MAX_VALUE;
+	protected double min_points;
+	protected double max_points;
 	protected Point position; 
-	protected List<Node> childs=null;
+	protected List<Node> children=null;
 	protected Point bestPlay;
 	protected boolean process=false;
-	protected int value;
+	protected double value;
 	protected boolean isTerminal = false;
 	
 
-	public Node(Board board,int min_points,int max_points,Point position, int value)
+	public Node(Board board,double min_points,double max_points,Point position, int value)
 	{
 		this.board = board;	
 		this.max_points=max_points;
@@ -30,24 +30,22 @@ public abstract class Node {
 		this.value=value;
 	}
 
-	public abstract List<Node> giveChilds();
+	public abstract List<Node> giveChildren();
 	
 	//	Retorna true si no es necesario seguir recorriendo los hijos
-	public boolean alphaBetaPrune() {
-		return alpha>=beta;
-	}
+	public abstract boolean alphaBetaPrune();
 
-	public abstract void update(int value, Point p);
+	public abstract void update(double value, Point p);
 
 
-	public int heuristicValue() {
+	public double heuristicValue() {
 		if(isTerminal)
 			return terminalValue(max_points-min_points);
 		
 		return max_points-min_points;
 	}
 
-	protected int terminalValue(int p) {
+	protected double terminalValue(double p) {
 		return (max_points>min_points) ? Integer.MAX_VALUE/2+p:Integer.MIN_VALUE/2+p;
 	}
 	
@@ -56,7 +54,7 @@ public abstract class Node {
 		return this.board.endGame();
 	}
 
-	public int returnValue()
+	public double returnValue()
 	{
 		return value;
 	}
@@ -72,12 +70,12 @@ public abstract class Node {
 	}
 
 
-	private String nicePrint(int value)
+	private String nicePrint(double value)
 	{
-		if(value==Integer.MAX_VALUE)
+		if(value>=(double) Integer.MAX_VALUE/2)
 			return "+INF";
 		
-		if(value==Integer.MIN_VALUE)
+		if(value<=(double) Integer.MIN_VALUE/2)
 			return "-INF";
 		
 		return String.valueOf(value);
@@ -87,7 +85,7 @@ public abstract class Node {
 	}
 
 	public List<Node> getChilds() {
-		return childs;
+		return children;
 	}
 
 }

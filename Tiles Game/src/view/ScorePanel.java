@@ -32,4 +32,5 @@ public class ScorePanel extends JPanel{
 		g.drawString("-Points: " + state.getAi_points(), 15, 105);
 	}
 	
+	
 }

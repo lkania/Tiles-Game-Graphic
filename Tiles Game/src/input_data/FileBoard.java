@@ -43,30 +43,30 @@ public class FileBoard {
 				throw new IOException();
 			}
 			char[] c=s.toCharArray();
-			
+
 			if(c.length!=getColumn())
 				throw new IOException();
-			
-				for(int j=0;j<getColumn() ;j++){
-					if((c[j]-'0')<0 || (c[j]-'0')>9 )
-						throw new IOException();
-					board[i][j]=c[j];
-				}
-			
-			
+
+			for(int j=0;j<getColumn() ;j++){
+				if((c[j]-'0')<0 || (c[j]-'0')>9 )
+					throw new IOException();
+				board[j][i]=(c[j]=='0') ? ' ':c[j];
+			}
+
+
 		}
 		if(fBuffer.ready())
 			throw new IOException();
 	}
 	private void createBoard() {
-		board=new char[gamedata[0]][gamedata[1]];
+		board=new char[gamedata[1]][gamedata[0]];
 
 	}
 
 	private void close() throws IOException{
 		fBuffer.close();
 		f.close();
-		
+
 	}
 	private int readLineInetegr() throws IOException {
 

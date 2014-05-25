@@ -7,8 +7,8 @@ import minimax.MiniMax;
 public class State {
 
 	private Board board;
-	private int human_points;
-	private int ai_points;
+	private double human_points;
+	private double ai_points;
 	private MiniMax minimax;
 	private volatile boolean humanTurn;
 	
@@ -29,6 +29,15 @@ public class State {
 		
 		ai_points+=board.delete(move.x,move.y);
 
+	}
+	
+	public String winner() {
+		if(human_points > ai_points)
+			return "Human";
+		else if(human_points < ai_points)
+			return "ORS";
+		else
+			return null;
 	}
 	
 	public boolean isHumanTurn()
@@ -71,11 +80,11 @@ public class State {
 		
 	}
 	
-	public int getHuman_points() {
+	public double getHuman_points() {
 		return human_points;
 	}
 
-	public int getAi_points() {
+	public double getAi_points() {
 		return ai_points;
 	}
 

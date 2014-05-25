@@ -4,8 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
+import javax.swing.JPanel;
 
 import core.Game;
 import core.State;
@@ -46,7 +46,13 @@ public class GDisplay extends JFrame implements Displayable {
 		tileSize = (int) (Math.min(screenDimension.width,
 				screenDimension.height) / (1.2 * Math.max(
 				boardDimension.height, boardDimension.width)));
-
+		
+		//Centra la ventana en el medio del screen
+		this.setLocation( (screenDimension.width - boardDimension.width*tileSize - dataPanelWidth)/2
+						, (screenDimension.height - boardDimension.width*tileSize)/2 );
+		
+		System.out.println(screenDimension);
+		System.out.println("width: " + boardDimension.width*tileSize+"; height: " + boardDimension.height*tileSize);
 		// el panel background esta para solucionar el problema de que el
 		// setsize del frame tambien
 		// considera el tamanio del title bar. que me come parte del frame al
@@ -76,6 +82,16 @@ public class GDisplay extends JFrame implements Displayable {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setVisible(true);
 		//game.computerMove();
+	}
+	
+	public void showResults(String winner) {
+		String results;
+		if(winner != null)
+			results = winner + " won!";
+		else {
+			results = "Empate!";
+		}
+		dataPanel.displayWinner(results);
 	}
 	
 	@Override

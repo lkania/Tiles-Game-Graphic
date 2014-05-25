@@ -24,7 +24,7 @@ public class Game {
 			display.display();
 			
 			if(state.isOver()) {
-				
+				display.showResults(state.winner());
 			} else {
 				computerMove();
 				state.toggleTurn();
