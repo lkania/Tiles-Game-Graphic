@@ -18,13 +18,21 @@ public class FileBoard {
 		f=new FileReader(s);
 		fBuffer = new BufferedReader(f);
 	}
-	public void  readData(String s) throws IOException {
+	public void  readData(String s) throws Exception  {
 
-		open(s);
-		for(int i=0;i<gamedata.length;i++)
-			gamedata[i]=readLineInetegr();
-		readBoard();
-		close();
+		try {
+			open(s);
+		} catch (FileNotFoundException e) {
+			
+			throw new Exception(e.getMessage());
+		}
+		
+			for(int i=0;i<gamedata.length;i++)
+				gamedata[i]=readLineInetegr();
+			readBoard();
+			close();
+			
+		
 
 	}
 
@@ -32,7 +40,7 @@ public class FileBoard {
 
 
 
-	private void readBoard() throws IOException {
+	private void readBoard() throws Exception {
 		createBoard();
 
 		String s;
@@ -40,41 +48,50 @@ public class FileBoard {
 		for(int i=0;i<getRows() ;i++){
 			s=fBuffer.readLine();
 			if(s==null){
-				throw new IOException();
+				throw new Exception("Archive board wrong ");
 			}
 			char[] c=s.toCharArray();
 
 			if(c.length!=getColumn())
-				throw new IOException();
+				throw new Exception("Archive board column problem");
 
 			for(int j=0;j<getColumn() ;j++){
 				if((c[j]-'0')<0 || (c[j]-'0')>9 )
-					throw new IOException();
+					throw new Exception("Archive board : element has to be a 1-9 number");
 				board[j][i]=(c[j]=='0') ? ' ':c[j];
 			}
 
 
 		}
 		if(fBuffer.ready())
-			throw new IOException();
+			throw new Exception("Extra line");
 	}
 	private void createBoard() {
 		board=new char[gamedata[1]][gamedata[0]];
 
 	}
 
-	private void close() throws IOException{
-		fBuffer.close();
-		f.close();
+	private void close() throws Exception {
+		try {
+			fBuffer.close();
+			f.close();
+		} catch (IOException e) {
+			throw new Exception(e.getMessage());
+			
+		}
+		
 
 	}
-	private int readLineInetegr() throws IOException {
+	private int readLineInetegr() throws Exception {
 
 		String s=fBuffer.readLine();
 		if(s==null){
-			throw new IOException();
+			throw new Exception("No data board especified");
 		}
-		return Integer.parseInt(s);
+		Integer res=Integer.parseInt(s);
+		if(res==null)
+			throw new Exception("Data board must be numbers");
+		return res;
 
 	}
 

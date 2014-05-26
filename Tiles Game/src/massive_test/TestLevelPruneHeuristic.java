@@ -17,12 +17,12 @@ public class TestLevelPruneHeuristic {
 
 	public static void csvFormat()
 	{
-		System.out.println("Comienza la creaciï¿½n del Archivo");
+		System.out.println("Comienza la creación del Archivo");
 		BufferedWriter writer = null;
-		int size = 14;
+		int size = 11;
 		int max_colors = 5;
 		int numberTest=100;
-		int levelMax=10;
+		int levelMax=4;
 		double totalDuration = 0;	
 
 		try {
@@ -76,7 +76,7 @@ public class TestLevelPruneHeuristic {
 			try {
 				writer.close();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 		}

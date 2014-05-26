@@ -1,6 +1,4 @@
 package input_data;
-import java.io.IOException;
-
 import core.Board;
 import core.Game;
 import core.State;
@@ -28,8 +26,8 @@ public class Main {
 				matrix = fb.getBoard();
 				human_points = fb.otherPoints();
 				computer_points = fb.turnPoints();
-			} catch (IOException e) {
-
+			} catch (Exception e) {
+				System.err.println(e.getMessage());
 				return;
 			}
 		}
