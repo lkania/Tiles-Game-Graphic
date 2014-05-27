@@ -60,7 +60,7 @@ public class FileBoard {
 				throw new Exception("Archive board column problem");
 
 			for(int j=0;j<getColumn() ;j++){
-				if((c[j]-'0')<0 || (c[j]-'0')>9 )
+				if(c[j]!=' ' && ((c[j]-'0')<0 || (c[j]-'0')>9) )
 					throw new Exception("Archive board : element has to be a 1-9 number");
 				board[j][i]=(c[j]=='0') ? ' ':c[j];
 			}
