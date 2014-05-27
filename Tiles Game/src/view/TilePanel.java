@@ -69,6 +69,12 @@ public class TilePanel extends JPanel{
 			return Color.magenta;
 		case '6':
 			return Color.cyan;
+		case '7' :
+			return Color.pink;
+		case '8':
+			return Color.orange;
+		case '9':
+			return Color.gray;
 		default:
 			return Color.white;
 				
