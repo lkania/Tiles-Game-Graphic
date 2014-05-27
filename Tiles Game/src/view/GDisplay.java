@@ -51,8 +51,6 @@ public class GDisplay extends JFrame implements Displayable {
 		this.setLocation( (screenDimension.width - boardDimension.width*tileSize - dataPanelWidth)/2
 						, (screenDimension.height - boardDimension.width*tileSize)/2 );
 		
-		System.out.println(screenDimension);
-		System.out.println("width: " + boardDimension.width*tileSize+"; height: " + boardDimension.height*tileSize);
 		// el panel background esta para solucionar el problema de que el
 		// setsize del frame tambien
 		// considera el tamanio del title bar. que me come parte del frame al

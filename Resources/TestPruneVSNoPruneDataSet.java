@@ -8,7 +8,7 @@ import core.Board;
 import minimax.MiniMax;
 
 
-public class TestLevelPruneHeuristic {
+public class TestPruneVSNoPrune {
 
 	public static void main(String[] args) {
 		csvFormat();
@@ -23,14 +23,14 @@ public class TestLevelPruneHeuristic {
 		int max_colors = 5;
 		int numberTest=100;
 		int levelMax=4;
-		double totalDuration = 0;	
+		double totalDurationWithPoda = 0,totalDurationWithOutPoda = 0;	
 
 		try {
 			File logFile = new File("datePruneHeuristic.txt");
 
 			writer = new BufferedWriter(new FileWriter(logFile));
-			System.out.println("row col colors level time");
-			writer.write("row col colors level time");
+			System.out.println("row col colors level Poda NoPoda");
+			writer.write("row col colors level Poda NoPoda");
 			writer.newLine();
 			for(int level=1;level<=levelMax;level++)
 			{
@@ -47,15 +47,23 @@ public class TestLevelPruneHeuristic {
 							{
 
 								Board board = new Board(row,column,colors);
+								
 								MiniMax minimax = new MiniMax(true,false,level,0,false);
-								long duration = minimax.testPrune(board);
-								totalDuration+=duration;
+								long durationWithPoda = minimax.testPrune(board);
+								totalDurationWithPoda+=durationWithPoda;
+								
+								MiniMax minimax2 = new MiniMax(false,false,level,0,false);
+								long durationWithOutPoda = minimax2.testPrune(board);
+								totalDurationWithOutPoda+=durationWithOutPoda;
+																
+								
 							}
 
-							totalDuration/=quantityTest;
+							totalDurationWithPoda/=quantityTest;
+							totalDurationWithOutPoda/=quantityTest;
 
-							writer.write(String.valueOf(totalDuration));
-							System.out.print(String.valueOf(totalDuration));
+							writer.write(String.valueOf(totalDurationWithPoda)+" "+String.valueOf(totalDurationWithOutPoda));
+							System.out.print(String.valueOf(totalDurationWithPoda)+" "+String.valueOf(totalDurationWithOutPoda));
 							System.out.println();
 							writer.newLine();
 
@@ -69,7 +77,7 @@ public class TestLevelPruneHeuristic {
 			
 			writer.close();
 			
-			System.out.println("Finaliz� la creaci�n del Archivo");
+			System.out.println("Finaliza la creacion del Archivo");
 
 		} catch (Exception e) {
 			e.printStackTrace();

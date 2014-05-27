@@ -29,6 +29,10 @@ public class FileBoard {
 		
 			for(int i=0;i<gamedata.length;i++)
 				gamedata[i]=readLineInetegr();
+			if(getRows()<0 || getColumn()<0)
+				throw new Exception(" Wrong dimension board in file");
+			if(turnPoints()<0 || otherPoints()<0)
+				throw new Exception("Negative points in file");
 			readBoard();
 			close();
 			

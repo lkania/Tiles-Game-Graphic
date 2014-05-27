@@ -154,20 +154,6 @@ public class Board implements Cloneable{
 	}
 
 
-	public void print() {
-
-		for(int row=0;row < board[0].length;row++)
-		{
-			for(int column=0;column< board.length;column++)
-			{
-				System.out.print(board[column][row]+" ");
-			}
-			System.out.println();
-		}
-		System.out.println();
-	}
-
-
 	private void generateRandomBoard(int rows,int columns,int colors)
 	{
 		char[][] newBoard = new char[columns][rows];
